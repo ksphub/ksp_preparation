@@ -1,21 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Interview Notes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Cloud Academy</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Welcome to My Interview Notes</h1>
+<!-- Header -->
+<header>
+    <h1>Linux Cloud Academy</h1>
+    <p>Linux | Kubernetes | AWS | DevOps Interview Notes</p>
+</header>
 
-<p>This website contains my Linux, Kubernetes, AWS, and DevOps notes.</p>
+<!-- Navigation Menu -->
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
 
-<h2>Linux Notes</h2>
+        <li><a href="linux/boot-process.html">Linux</a></li>
 
-<a href="linux/boot-process.html">
-Linux Boot Process
-</a>
+        <li><a href="kubernetes/index.html">Kubernetes</a></li>
+
+        <li><a href="aws/index.html">AWS</a></li>
+
+        <li><a href="terraform/index.html">Terraform</a></li>
+
+        <li><a href="ansible/index.html">Ansible</a></li>
+
+        <li><a href="docker/index.html">Docker</a></li>
+
+        <li><a href="interview/index.html">Interview Questions</a></li>
+    </ul>
+</nav>
+
+<!-- Search Box -->
+<section class="search-section">
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search Notes..."
+        onkeyup="searchNotes()">
+
+</section>
+
+<!-- Notes List -->
+
+<section>
+
+<h2>Available Notes</h2>
+
+<ul id="notesList">
+
+<li><a href="linux/boot-process.html">Linux Boot Process</a></li>
+
+<li><a href="linux/lvm.html">Linux LVM</a></li>
+
+<li><a href="linux/networking.html">Linux Networking</a></li>
+
+<li><a href="linux/systemd.html">Systemd</a></li>
+
+<li><a href="linux/ssh.html">SSH</a></li>
+
+<li><a href="linux/freeipa.html">FreeIPA</a></li>
+
+<li><a href="kubernetes/pods.html">Kubernetes Pods</a></li>
+
+<li><a href="kubernetes/deployment.html">Deployment</a></li>
+
+<li><a href="aws/ec2.html">AWS EC2</a></li>
+
+<li><a href="aws/vpc.html">AWS VPC</a></li>
+
+<li><a href="terraform/modules.html">Terraform Modules</a></li>
+
+<li><a href="ansible/playbooks.html">Ansible Playbooks</a></li>
+
+</ul>
+
+</section>
+
+<script src="script.js"></script>
 
 </body>
 </html>
