@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Happy Birthday Celebration</title>
 
 <style>
@@ -13,16 +14,26 @@
     box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-    background: radial-gradient(ellipse at 50% 100%,
-        #172554 0%, #080d27 55%, #01030c 100%);
-    color: white;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Animation canvas */
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: white;
+    background: linear-gradient(
+        to bottom,
+        #01030c,
+        #08132d,
+        #172554,
+        #090e25
+    );
+}
+
+/* Fixed night sky */
 #sky {
     position: fixed;
     inset: 0;
@@ -32,99 +43,75 @@ body {
     pointer-events: none;
 }
 
-/* Full moon */
-.moon {
+/* Crescent moon */
+.moon-container {
     position: fixed;
-    top: 65px;
     right: 12%;
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
+    bottom: 24%;
+    width: 125px;
+    height: 125px;
     z-index: 1;
-    background:
-        radial-gradient(circle at 35% 35%,
-            #fffef0 0%,
-            #f8f1cf 45%,
-            #e8dba9 75%,
-            #c6b98d 100%);
-    box-shadow:
-        0 0 25px #fff5cc,
-        0 0 60px rgba(255, 240, 180, 0.7),
-        0 0 120px rgba(255, 220, 130, 0.35);
-    animation: moonGlow 5s infinite alternate;
+    animation: moonRise 12s ease-out forwards;
+    pointer-events: none;
 }
 
-/* Moon surface craters */
-.crater {
+.moon {
     position: absolute;
+    inset: 0;
     border-radius: 50%;
-    background: rgba(155, 145, 112, 0.25);
-    box-shadow: inset 3px 3px 7px rgba(100, 90, 65, 0.2);
+    background: radial-gradient(
+        circle at 35% 35%,
+        #fffde8,
+        #ffe9a3 65%,
+        #e9bd68
+    );
+    box-shadow:
+        0 0 25px #fff1b5,
+        0 0 60px rgba(255, 220, 130, 0.65),
+        0 0 110px rgba(255, 190, 80, 0.3);
+    overflow: hidden;
 }
 
-.crater1 {
-    width: 30px;
-    height: 25px;
-    top: 30px;
-    left: 35px;
+/* Dark shadow creates crescent shape */
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    top: -12px;
+    left: 37px;
+    background: #071126;
+    box-shadow: -8px 4px 15px rgba(0,0,0,0.15);
 }
 
-.crater2 {
-    width: 20px;
-    height: 20px;
-    top: 75px;
-    left: 80px;
-}
-
-.crater3 {
-    width: 14px;
-    height: 14px;
-    top: 45px;
-    left: 100px;
-}
-
-.crater4 {
-    width: 35px;
-    height: 30px;
-    top: 95px;
-    left: 35px;
-}
-
-.crater5 {
-    width: 12px;
-    height: 12px;
-    top: 22px;
-    left: 85px;
-}
-
-@keyframes moonGlow {
+@keyframes moonRise {
     from {
-        box-shadow: 0 0 25px #fff5cc,
-                    0 0 60px rgba(255,240,180,.6);
+        transform: translateY(100px);
+        opacity: 0.2;
     }
     to {
-        box-shadow: 0 0 40px #fff5cc,
-                    0 0 100px rgba(255,240,180,.9),
-                    0 0 150px rgba(255,220,130,.4);
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-/* Main birthday content */
+/* Content sections */
 .content {
     position: relative;
     z-index: 2;
-    min-height: 100vh;
+    min-height: 115vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 25px;
+    padding: 70px 20px;
 }
 
 .top-message {
-    font-size: 18px;
+    font-size: 17px;
     letter-spacing: 5px;
     color: #ffd700;
     margin-bottom: 20px;
@@ -132,7 +119,7 @@ body {
 }
 
 h1 {
-    font-size: clamp(40px, 8vw, 85px);
+    font-size: clamp(38px, 8vw, 85px);
     color: #ffd700;
     text-shadow:
         0 0 10px #ff8c00,
@@ -142,27 +129,32 @@ h1 {
 }
 
 @keyframes birthdayGlow {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.04);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.04); }
 }
 
 h2 {
-    font-size: clamp(23px, 4vw, 38px);
+    font-size: clamp(22px, 4vw, 38px);
     color: #ff9ecb;
     margin-top: 20px;
     text-shadow: 0 0 20px #ff1493;
 }
 
+.divider {
+    width: 200px;
+    height: 2px;
+    margin: 25px;
+    background: linear-gradient(
+        90deg, transparent, gold, transparent
+    );
+}
+
 .wishes {
-    max-width: 700px;
+    max-width: 720px;
     font-size: clamp(16px, 2.5vw, 21px);
-    line-height: 1.9;
+    line-height: 2;
     color: #fff8dc;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .highlight {
@@ -170,28 +162,16 @@ h2 {
     font-weight: bold;
 }
 
-.divider {
-    width: 200px;
-    height: 2px;
-    margin: 22px;
-    background: linear-gradient(
-        90deg, transparent, gold, transparent
-    );
-}
-
-/* Birthday cake */
 .cake {
     font-size: 55px;
-    margin: 20px 0;
+    margin: 25px;
     animation: cakeBounce 1.5s infinite alternate;
 }
 
 @keyframes cakeBounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-10px); }
+    to { transform: translateY(-12px); }
 }
 
-/* Button */
 button {
     margin-top: 25px;
     padding: 15px 32px;
@@ -207,18 +187,49 @@ button {
 }
 
 button:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 0 40px gold;
 }
 
+/* Second scrolling section */
+.second-section {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.second-section h2 {
+    color: #ffd700;
+    font-size: clamp(28px, 5vw, 45px);
+}
+
+.second-section p {
+    max-width: 700px;
+    margin-top: 25px;
+    font-size: 19px;
+    line-height: 2;
+    color: #fff8dc;
+}
+
+.second-section .emoji {
+    font-size: 65px;
+    margin: 30px;
+}
+
 .footer {
-    margin-top: 30px;
+    margin-top: 35px;
     color: #ffd700;
     letter-spacing: 3px;
     font-size: 14px;
 }
 
-/* Floating sparkles */
+/* Floating golden sparkles */
 .sparkle {
     position: fixed;
     z-index: 1;
@@ -239,57 +250,29 @@ button:hover {
     }
 }
 
-/* Mobile layout */
+/* Mobile */
 @media(max-width: 600px) {
-    .moon {
-        width: 85px;
-        height: 85px;
-        top: 25px;
+    .moon-container {
+        width: 75px;
+        height: 75px;
         right: 8%;
+        bottom: 20%;
     }
 
-    .crater1 {
-        width: 18px;
-        height: 15px;
-        top: 18px;
-        left: 20px;
-    }
-
-    .crater2 {
-        width: 13px;
-        height: 13px;
-        top: 48px;
-        left: 48px;
-    }
-
-    .crater3 {
-        width: 10px;
-        height: 10px;
-        top: 27px;
-        left: 60px;
-    }
-
-    .crater4 {
-        width: 20px;
-        height: 18px;
-        top: 58px;
-        left: 20px;
-    }
-
-    .crater5 {
-        width: 8px;
-        height: 8px;
-        top: 12px;
-        left: 50px;
-    }
-
-    .content {
-        padding: 15px;
+    .moon::after {
+        width: 68px;
+        height: 68px;
+        left: 25px;
+        top: -8px;
     }
 
     .top-message {
         font-size: 12px;
         letter-spacing: 3px;
+    }
+
+    .content {
+        padding: 60px 15px;
     }
 }
 </style>
@@ -299,17 +282,13 @@ button:hover {
 
 <canvas id="sky"></canvas>
 
-<!-- Full moon with craters -->
-<div class="moon">
-    <div class="crater crater1"></div>
-    <div class="crater crater2"></div>
-    <div class="crater crater3"></div>
-    <div class="crater crater4"></div>
-    <div class="crater crater5"></div>
+<!-- Rising crescent moon -->
+<div class="moon-container">
+    <div class="moon"></div>
 </div>
 
-<!-- Birthday greeting -->
-<div class="content">
+<!-- Birthday greeting section -->
+<section class="content">
 
     <div class="top-message">
         ✨ A NIGHT FULL OF MAGIC ✨
@@ -323,12 +302,12 @@ button:hover {
     <div class="divider"></div>
 
     <div class="wishes">
-        May your special day shine as brightly as the
-        beautiful full moon in the night sky.
+        May your special day shine as beautifully
+        as the crescent moon in the night sky.
 
         <br><br>
 
-        May your life be filled with
+        May your life always be filled with
         <span class="highlight">
             happiness, good health, love and success.
         </span>
@@ -337,12 +316,12 @@ button:hover {
 
         May every star bring you a new opportunity,
         every dream become reality, and every moment
-        be filled with beautiful memories.
+        create beautiful memories.
 
         <br><br>
 
-        Wishing you a wonderful birthday and
-        an amazing year ahead!
+        Wishing you a wonderful birthday
+        and an amazing year ahead!
     </div>
 
     <div class="cake">🎂 🎉 🎁</div>
@@ -355,7 +334,53 @@ button:hover {
         WITH LOVE & BEST WISHES ❤️
     </div>
 
-</div>
+</section>
+
+<!-- Additional scrollable birthday wishes -->
+<section class="second-section">
+
+    <div class="emoji">🌙 ⭐ 🎂</div>
+
+    <h2>May Your Dreams Shine Bright!</h2>
+
+    <div class="divider"></div>
+
+    <p>
+        Another year, another beautiful journey!
+
+        <br><br>
+
+        May you always find reasons to smile,
+        strength to overcome challenges,
+        courage to follow your dreams,
+        and love in every step of life.
+
+        <br><br>
+
+        May this birthday mark the beginning
+        of a wonderful chapter filled with
+        memorable moments and endless blessings.
+
+        <br><br>
+
+        <span class="highlight">
+            Keep smiling, keep shining and keep celebrating!
+        </span>
+    </p>
+
+    <div class="emoji">🎊 🎇 🎈</div>
+
+    <button onclick="grandCelebration()">
+        🎆 Celebrate Again!
+    </button>
+
+    <div class="footer">
+        MADE WITH ❤️ AND BEST WISHES
+        <br><br>
+        KSP PREPARATION
+    </div>
+
+</section>
 
 <script>
 const canvas = document.getElementById("sky");
@@ -372,7 +397,11 @@ function resizeCanvas() {
     createStars();
 }
 
-// Natural twinkling stars
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+/* Create stars */
 function createStars() {
     stars = [];
 
@@ -384,10 +413,9 @@ function createStars() {
         stars.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 1.8 + 0.3,
-            opacity: Math.random(),
-            phase: Math.random() * 6.28,
-            speed: Math.random() * 0.035 + 0.005
+            size: random(0.4, 2),
+            phase: random(0, 6.28),
+            speed: random(0.005, 0.04)
         });
     }
 }
@@ -395,22 +423,17 @@ function createStars() {
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
-function random(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-// Draw stars
+/* Twinkling stars */
 function drawStars() {
     stars.forEach(s => {
         s.phase += s.speed;
 
         const brightness =
-            0.3 + 0.7 * Math.abs(Math.sin(s.phase));
+            0.25 + 0.75 * Math.abs(Math.sin(s.phase));
 
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle =
-            `rgba(255,255,255,${brightness})`;
+        ctx.fillStyle = `rgba(255,255,255,${brightness})`;
         ctx.shadowBlur = 7;
         ctx.shadowColor = "white";
         ctx.fill();
@@ -419,12 +442,12 @@ function drawStars() {
     ctx.shadowBlur = 0;
 }
 
-// Shooting stars
+/* Shooting stars */
 function createShootingStar() {
     shootingStars.push({
         x: random(0, canvas.width),
-        y: random(0, canvas.height * 0.45),
-        length: random(80, 150),
+        y: random(0, canvas.height * 0.5),
+        length: random(70, 150),
         speed: random(8, 13),
         life: 1
     });
@@ -467,7 +490,7 @@ function drawShootingStars() {
 
 setInterval(createShootingStar, 3000);
 
-// Firework rockets
+/* Firework rockets */
 function launchRocket(type = Math.floor(Math.random() * 8)) {
     rockets.push({
         x: random(50, canvas.width - 50),
@@ -479,7 +502,7 @@ function launchRocket(type = Math.floor(Math.random() * 8)) {
     });
 }
 
-// Particle creation
+/* Add particles */
 function addParticle(x, y, angle, speed, color,
                      gravity = 0.045, life = 100) {
     particles.push({
@@ -495,11 +518,11 @@ function addParticle(x, y, angle, speed, color,
     });
 }
 
-// Different firework patterns
+/* Eight different fireworks */
 function explode(x, y, type, hue) {
     const total = 130;
 
-    // 1. Circular burst
+    // 1. Circular fireworks
     if (type === 0) {
         for (let i = 0; i < total; i++) {
             addParticle(
@@ -515,8 +538,7 @@ function explode(x, y, type, hue) {
         for (let i = 0; i < total; i++) {
             addParticle(
                 x, y, Math.PI * 2 * i / 65,
-                i < 65 ? 3 : 6,
-                "#FFD700"
+                i < 65 ? 3 : 6, "#FFD700"
             );
         }
     }
@@ -542,16 +564,14 @@ function explode(x, y, type, hue) {
         }
     }
 
-    // 5. Star burst
+    // 5. Starburst
     else if (type === 4) {
         for (let i = 0; i < total; i++) {
             const angle = Math.PI * 2 * i / total;
             const speed =
                 Math.abs(Math.sin(angle * 2.5)) > 0.7 ? 7 : 3;
 
-            addParticle(
-                x, y, angle, speed, "#FF69B4"
-            );
+            addParticle(x, y, angle, speed, "#FF69B4");
         }
     }
 
@@ -561,13 +581,12 @@ function explode(x, y, type, hue) {
             addParticle(
                 x, y,
                 random(-Math.PI * 0.95, -Math.PI * 0.05),
-                random(3, 8),
-                "#00FFFF", 0.13, 100
+                random(3, 8), "#00FFFF", 0.13, 100
             );
         }
     }
 
-    // 7. Crackling sparkles
+    // 7. Crackling sparks
     else if (type === 6) {
         for (let i = 0; i < total; i++) {
             particles.push({
@@ -585,7 +604,7 @@ function explode(x, y, type, hue) {
         }
     }
 
-    // 8. Multi-colour burst
+    // 8. Multicolour burst
     else if (type === 7) {
         for (let i = 0; i < total; i++) {
             addParticle(
@@ -597,7 +616,7 @@ function explode(x, y, type, hue) {
     }
 }
 
-// Main animation
+/* Main animation */
 function animate() {
     ctx.fillStyle = "rgba(2,3,15,0.20)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -614,7 +633,6 @@ function animate() {
         ctx.fillStyle = `hsl(${r.hue},100%,70%)`;
         ctx.fill();
 
-        // Rocket trail
         ctx.beginPath();
         ctx.moveTo(r.x, r.y + 4);
         ctx.lineTo(r.x, r.y + 25);
@@ -631,7 +649,6 @@ function animate() {
     particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
-
         p.vy += p.gravity;
         p.vx *= 0.985;
         p.vy *= 0.985;
@@ -651,7 +668,8 @@ function animate() {
             ctx.fillStyle = "white";
             ctx.fillRect(
                 p.x + random(-5, 5),
-                p.y + random(-5, 5), 2, 2
+                p.y + random(-5, 5),
+                2, 2
             );
         }
 
@@ -666,13 +684,14 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Automatic fireworks
+/* Automatic fireworks */
 function automaticFireworks() {
     launchRocket();
-    setTimeout(automaticFireworks, random(600, 1200));
+
+    setTimeout(automaticFireworks, random(700, 1300));
 }
 
-// Grand fireworks celebration
+/* Grand celebration */
 function grandCelebration() {
     for (let i = 0; i < 24; i++) {
         setTimeout(() => {
@@ -681,7 +700,7 @@ function grandCelebration() {
     }
 }
 
-// Floating golden sparkles
+/* Floating golden sparkles */
 function createSparkle() {
     const sparkle = document.createElement("div");
 
