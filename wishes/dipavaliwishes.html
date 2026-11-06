@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, #172554, #020617 75%);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.birthday {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 9vw, 5.5rem);
+    color: #ffd700;
+    text-shadow: 0 0 15px #ff4500,
+                 0 0 35px #ff1493;
+    animation: glow 1.5s infinite alternate;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    color: #ff69b4;
+    margin: 15px;
+}
+
+p {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    line-height: 1.8;
+    max-width: 650px;
+}
+
+button {
+    margin-top: 25px;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff1493, #ff8c00);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff1493;
+}
+
+@keyframes glow {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+
+.emoji {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    to { transform: translateY(-12px); }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="birthday">
+    <div class="emoji">🎂 🎉 🎁</div>
+
+    <h1>Happy Birthday!</h1>
+
+    <!-- Change the name below -->
+    <h2>Dear Birthday Star ❤️</h2>
+
+    <p>
+        May your special day be filled with happiness,
+        good health, success and endless love.
+        May all your dreams come true!
+    </p>
+
+    <button onclick="launchCelebration()">
+        🎆 Blast the Fireworks!
+    </button>
+</div>
+
+<script>
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let rockets = [];
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+
+  // Natural night sky stars
+let stars = [];
+
+function createStars() {
+    stars = [];
+
+    const totalStars = Math.floor(
+        (canvas.width * canvas.height) / 1800
+    );
+
+    for (let i = 0; i < totalStars; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 1.8 + 0.3,
+            opacity: Math.random() * 0.7 + 0.3,
+            speed: Math.random() * 0.025 + 0.005,
+            phase: Math.random() * Math.PI * 2
+        });
+    }
+}
+
+createStars();
+
+window.addEventListener("resize", createStars);
+
+// Draw twinkling stars
+function drawStars() {
+    stars.forEach(star => {
+        star.phase += star.speed;
+
+        const brightness =
+            star.opacity * (0.65 + 0.35 * Math.sin(star.phase));
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+
+        ctx.fillStyle = `rgba(255,255,255,${brightness})`;
+        ctx.shadowBlur = star.size > 1.3 ? 8 : 2;
+        ctx.shadowColor = "#ffffff";
+        ctx.fill();
+    });
+
+    ctx.shadowBlur = 0;
+}
+  
+  window.addEventListener("resize", resizeCanvas);
+
+const random = (min, max) =>
+    Math.random() * (max - min) + min;
+
+function launchRocket(type = Math.floor(Math.random() * 8)) {
+    rockets.push({
+        x: random(80, canvas.width - 80),
+        y: canvas.height,
+        targetY: random(80, canvas.height * 0.55),
+        speed: random(5, 8),
+        type: type,
+        color: random(0, 360)
+    });
+}
+
+function addParticle(x, y, angle, speed, color, gravity = 0.04, life = 90, size = 2.5) {
+    particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        color,
+        gravity,
+        life,
+        maxLife: life,
+        size,
+        type: "normal"
+    });
+}
+
+function explode(x, y, type, hue) {
+
+    const count = 110;
+
+    // 1. Traditional circular fireworks
+    if (type === 0) {
+        for (let i = 0; i < count; i++) {
+            const angle = Math.PI * 2 * i / count;
+            addParticle(x, y, angle, random(2, 6),
+                `hsl(${hue + random(-35, 35)},100%,60%)`);
+        }
+    }
+
+    // 2. Double ring fireworks
+    else if (type === 1) {
+        for (let i = 0; i < 150; i++) {
+            const angle = Math.PI * 2 * i / 75;
+            const speed = i < 75 ? 3 : 6;
+            addParticle(x, y, angle, speed,
+                `hsl(${hue},100%,65%)`);
+        }
+    }
+
+    // 3. Golden willow / raining crackers
+    else if (type === 2) {
+        for (let i = 0; i < 120; i++) {
+            const angle = random(0, Math.PI * 2);
+            const p = {
+                x, y,
+                vx: Math.cos(angle) * random(1, 5),
+                vy: Math.sin(angle) * random(1, 4),
+                color: "#FFD700",
+                gravity: 0.09,
+                life: random(100, 160),
+                maxLife: 160,
+                size: random(1, 3),
+                type: "normal"
+            };
+            particles.push(p);
+        }
+    }
+
+    // 4. Spiral fireworks
+    else if (type === 3) {
+        for (let i = 0; i < 120; i++) {
+            const angle = i * 0.25;
+            const speed = 1.5 + i * 0.035;
+            addParticle(x, y, angle, speed,
+                `hsl(${hue + i * 2},100%,60%)`);
+        }
+    }
+
+    // 5. Star-shaped explosion
+    else if (type === 4) {
+        for (let i = 0; i < 120; i++) {
+            const angle = Math.PI * 2 * i / 120;
+            const wave = Math.abs(Math.sin(angle * 2.5));
+            const speed = wave > 0.7 ? 7 : 3;
+            addParticle(x, y, angle, speed,
+                `hsl(${hue},100%,65%)`);
+        }
+    }
+
+    // 6. Fountain effect
+    else if (type === 5) {
+        for (let i = 0; i < 100; i++) {
+            const angle = random(-Math.PI * 0.95, -Math.PI * 0.05);
+            addParticle(x, y, angle, random(3, 8),
+                `hsl(${hue + random(-40, 40)},100%,65%)`,
+                0.13, 100);
+        }
+    }
+
+    // 7. Crackling sparkling fireworks
+    else if (type === 6) {
+        for (let i = 0; i < 130; i++) {
+            const angle = random(0, Math.PI * 2);
+            const p = {
+                x, y,
+                vx: Math.cos(angle) * random(1, 6),
+                vy: Math.sin(angle) * random(1, 6),
+                color: Math.random() > 0.5 ? "#FFFFFF" : "#FFD700",
+                gravity: 0.04,
+                life: random(30, 80),
+                maxLife: 80,
+                size: random(1, 3),
+                type: "spark"
+            };
+            particles.push(p);
+        }
+    }
+
+    // 8. Multi-colour double explosion
+    else if (type === 7) {
+        for (let i = 0; i < 150; i++) {
+            const angle = Math.PI * 2 * i / 150;
+            const color = i % 2 === 0 ? "#FF1493" : "#00FFFF";
+            addParticle(x, y, angle, random(2, 7), color);
+        }
+
+        setTimeout(() => {
+            explode(x + 40, y - 30, 0, 50);
+        }, 250);
+    }
+}
+
+function animate() {
+    ctx.fillStyle = "rgba(2, 6, 23, 0.18)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Rocket movement
+    rockets.forEach((r, i) => {
+        r.y -= r.speed;
+
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${r.color},100%,65%)`;
+        ctx.fill();
+
+        if (r.y <= r.targetY) {
+            explode(r.x, r.y, r.type, r.color);
+            rockets.splice(i, 1);
+        }
+    });
+
+    // Particle movement
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.gravity;
+
+        p.vx *= 0.985;
+        p.vy *= 0.985;
+        p.life--;
+
+        ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+
+        if (p.type === "spark" && Math.random() > 0.8) {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(p.x + random(-5, 5), p.y + random(-5, 5), 2, 2);
+        }
+
+        if (p.life <= 0) {
+            particles.splice(i, 1);
+        }
+    });
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(animate);
+}
+
+// Random fireworks automatically
+setInterval(() => {
+    launchRocket();
+}, 550);
+
+// Button celebration
+function launchCelebration() {
+    for (let i = 0; i < 16; i++) {
+        setTimeout(() => {
+            launchRocket(i % 8);
+        }, i * 180);
+    }
+}
+
+animate();
+
+</script>
+
+</body>
+</html>
