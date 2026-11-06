@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday SU</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(to bottom, #020617, #101b3b, #263b62);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Night sky */
+.sky {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1.5); }
+}
+
+/* SU written with stars */
+.star-name {
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 650px);
+    height: 150px;
+    filter: drop-shadow(0 0 12px #fff3a6);
+}
+
+.star-name span {
+    position: absolute;
+    color: #fff5b8;
+    font-size: 13px;
+    text-shadow: 0 0 8px white, 0 0 18px gold;
+    animation: nameGlow 1.5s infinite alternate;
+}
+
+@keyframes nameGlow {
+    from { opacity: 0.45; }
+    to { opacity: 1; }
+}
+
+/* Rising crescent moon */
+.moon {
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: #fff1b0;
+    box-shadow: 0 0 30px #ffe9a3, 0 0 75px #ffc85c;
+    right: 13%;
+    bottom: -110px;
+    animation: moonRise 15s ease-out forwards;
+}
+
+.moon::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #101b3b;
+    top: -13px;
+    left: 30px;
+}
+
+@keyframes moonRise {
+    to { bottom: 38%; }
+}
+
+/* Shooting stars */
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: rotate(-35deg);
+    animation: shooting 3s linear infinite;
+}
+
+@keyframes shooting {
+    0% {
+        transform: translate(0, 0) rotate(-35deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-450px, 350px) rotate(-35deg);
+        opacity: 0;
+    }
+}
+
+/* Fireworks canvas */
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* City skyline */
+.city {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: end;
+    justify-content: space-around;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.building {
+    position: relative;
+    width: 8%;
+    background: linear-gradient(to bottom, #172747, #050b19);
+    border: 1px solid #354767;
+    box-shadow: 0 0 20px #0b1730;
+}
+
+.building::before {
+    content: "";
+    position: absolute;
+    inset: 12px 8px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 12px,
+        #ffd66b 13px 17px,
+        transparent 18px 28px
+    );
+    opacity: 0.8;
+}
+
+/* Sky lanterns */
+.lantern {
+    position: fixed;
+    bottom: -70px;
+    width: 22px;
+    height: 30px;
+    background: linear-gradient(to bottom, #fff2a6, #ff8c42);
+    border-radius: 45% 45% 35% 35%;
+    box-shadow: 0 0 18px #ffbd59, 0 0 35px #ff9e43;
+    z-index: 4;
+    animation: lanternRise linear infinite;
+    pointer-events: none;
+}
+
+.lantern::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    background: #ffdf8c;
+    bottom: -4px;
+    left: 7px;
+    border-radius: 50%;
+}
+
+@keyframes lanternRise {
+    0% {
+        transform: translateY(0) translateX(0) rotate(-5deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    50% {
+        transform: translateY(-55vh) translateX(35px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(-115vh) translateX(-30px) rotate(-5deg);
+        opacity: 0;
+    }
+}
+
+/* Main birthday content */
+section {
+    position: relative;
+    z-index: 5;
+    min-height: 110vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 35px 20px 210px;
+}
+
+h1 {
+    font-size: clamp(38px, 8vw, 75px);
+    color: #ffe69b;
+    text-shadow: 0 0 15px #ffb347, 0 0 35px #ff8c42;
+    animation: titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 0 0 10px gold; }
+    to { text-shadow: 0 0 35px orange, 0 0 60px gold; }
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: clamp(24px, 5vw, 40px);
+    color: #fff5c4;
+}
+
+.message {
+    margin-top: 25px;
+    max-width: 700px;
+    font-size: clamp(17px, 3vw, 23px);
+    line-height: 1.8;
+    color: #f4eaff;
+    text-shadow: 0 0 8px #a9baff;
+}
+
+button {
+    margin-top: 30px;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ffb347, #ff6b81);
+    color: #171126;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px #ffb347;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+.second {
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(4, 10, 29, 0.65)
+    );
+}
+
+.second h2 {
+    color: #ffd98a;
+    font-size: clamp(30px, 6vw, 50px);
+}
+
+footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 25px;
+    color: #ffe7b0;
+}
+
+@media (max-width: 600px) {
+    .moon {
+        width: 65px;
+        height: 65px;
+        right: 9%;
+    }
+
+    .moon::after {
+        width: 63px;
+        height: 63px;
+        left: 22px;
+        top: -9px;
+    }
+
+    .star-name {
+        top: 17%;
+    }
+
+    .city {
+        height: 120px;
+    }
+
+    .building {
+        width: 10%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky" id="sky">
+    <div class="moon"></div>
+
+    <div class="star-name" id="starName"></div>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<!-- Birthday content -->
+<section>
+    <h1>🎂 Happy Birthday 🎂</h1>
+    <h2>Dear SU ❤️</h2>
+
+    <p class="message">
+        May your special day shine as brightly as the stars,
+        glow as beautifully as the rising moon,
+        and fill your life with endless happiness.
+        <br><br>
+        May all your dreams come true.
+        Wishing you wonderful moments, success,
+        good health and lots of love!
+    </p>
+
+    <button onclick="celebrate()">🎆 Celebrate SU's Birthday 🎆</button>
+</section>
+
+<section class="second">
+    <h2>✨ A Sky Full of Wishes for SU ✨</h2>
+
+    <p class="message">
+        Tonight, the stars are shining for you.
+        <br>
+        The moon is rising to celebrate you.
+        <br>
+        The lanterns are carrying your wishes into the sky.
+        <br><br>
+        Keep smiling, keep shining and make every moment beautiful.
+        <br><br>
+        ❤️ Many Many Happy Returns of the Day! ❤️
+    </p>
+
+    <button onclick="celebrate()">Launch More Fireworks!</button>
+</section>
+
+<footer>
+    Made with ❤️ and lots of birthday wishes
+</footer>
+
+<div class="city" id="city"></div>
+
+<script>
+// Create random stars in the sky
+const sky = document.getElementById("sky");
+
+for (let i = 0; i < 150; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    sky.appendChild(star);
+}
+
+// Draw SU using star positions
+const starName = document.getElementById("starName");
+
+const letters = {
+    S: [
+        [1,0],[2,0],[3,0],
+        [0,1],[0,2],[1,3],[2,3],
+        [3,4],[3,5],[0,6],[1,6],[2,6]
+    ],
+    U: [
+        [0,0],[0,1],[0,2],[0,3],[0,4],[1,5],
+        [2,5],[3,4],[3,3],[3,2],[3,1],[3,0]
+    ]
+};
+
+function drawLetter(letter, offset) {
+    letters[letter].forEach(([x,y]) => {
+        const star = document.createElement("span");
+        star.textContent = "✦";
+        star.style.left = (offset + x * 25) + "px";
+        star.style.top = (y * 17) + "px";
+        star.style.animationDelay = Math.random() * 2 + "s";
+        starName.appendChild(star);
+    });
+}
+
+drawLetter("S", 0);
+drawLetter("U", 135);
+
+// Create city buildings
+const city = document.getElementById("city");
+
+for (let i = 0; i < 15; i++) {
+    const building = document.createElement("div");
+    building.className = "building";
+    building.style.height = (65 + Math.random() * 120) + "px";
+    city.appendChild(building);
+}
+
+// Create rising sky lanterns
+function createLanterns() {
+    for (let i = 0; i < 25; i++) {
+        const lantern = document.createElement("div");
+        lantern.className = "lantern";
+        lantern.style.left = Math.random() * 100 + "%";
+        lantern.style.animationDuration = (12 + Math.random() * 15) + "s";
+        lantern.style.animationDelay = (Math.random() * 18) + "s";
+        lantern.style.transform = "scale(" + (0.7 + Math.random() * 0.8) + ")";
+        document.body.appendChild(lantern);
+    }
+}
+
+createLanterns();
+
+// Shooting stars
+function createShootingStar() {
+    const shooting = document.createElement("div");
+    shooting.className = "shooting-star";
+    shooting.style.left = (40 + Math.random() * 60) + "%";
+    shooting.style.top = (Math.random() * 50) + "%";
+    sky.appendChild(shooting);
+
+    setTimeout(() => shooting.remove(), 3000);
+}
+
+setInterval(createShootingStar, 2500);
+
+// Fireworks animation
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+let particles = [];
+
+function explode(x, y) {
+    const colors = [
+        "#ff3b3b", "#ffd700", "#00e5ff",
+        "#ff69b4", "#7cff6b", "#ffffff",
+        "#b388ff", "#ff9f43"
+    ];
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    for (let i = 0; i < 100; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 5 + 1;
+
+        particles.push({
+            x: x,
+            y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 100,
+            color: color,
+            size: Math.random() * 3 + 1
+        });
+    }
+}
+
+function animateFireworks() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, index) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.025;
+        p.vx *= 0.99;
+        p.vy *= 0.99;
+        p.life--;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.life / 100);
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+
+        if (p.life <= 0) {
+            particles.splice(index, 1);
+        }
+    });
+
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(animateFireworks);
+}
+
+animateFireworks();
+
+// Automatic fireworks
+function automaticFireworks() {
+    explode(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height * 0.55
+    );
+}
+
+setInterval(automaticFireworks, 1100);
+
+// Button celebration
+function celebrate() {
+    for (let i = 0; i < 8; i++) {
+        setTimeout(() => {
+            explode(
+                Math.random() * canvas.width,
+                Math.random() * canvas.height * 0.65
+            );
+        }, i * 250);
+    }
+}
+
+// Start with a birthday celebration
+setTimeout(celebrate, 1000);
+</script>
+
+</body>
+</html>
