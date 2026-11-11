@@ -37,25 +37,24 @@ body {
 .star {
     position: absolute;
     color: white;
-    font-size: 3px;
-    text-shadow: 0 0 7px white;
+    text-shadow: 0 0 8px white;
     animation: twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle {
-    from { opacity: 0.3; transform: scale(0.7); }
+    from { opacity: 0.2; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1.5); }
 }
 
-/* STAR LETTER MESSAGE */
+/* BIRTHDAY STAR CANVAS */
 .star-message {
     position: absolute;
-    top: 9%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     width: 98%;
-    max-width: 850px;
-    height: 155px;
+    max-width: 950px;
+    height: 240px;
 }
 
 #starText {
@@ -67,46 +66,46 @@ body {
 /* STYLISH CRESCENT MOON */
 .moon-container {
     position: absolute;
-    top: 29%;
+    top: 22%;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 90px;
     animation: moonFloat 4s ease-in-out infinite;
 }
 
 .moon {
     position: absolute;
-    width: 65px;
-    height: 65px;
+    width: 58px;
+    height: 58px;
     top: 10px;
-    left: 18px;
+    left: 17px;
     border-radius: 50%;
     background: linear-gradient(135deg, #fffde7, #ffe58a, #ffbd45);
     overflow: hidden;
     box-shadow:
         0 0 12px #fff5bd,
         0 0 25px #ffdf70,
-        0 0 45px rgba(255, 196, 72, 0.5);
+        0 0 45px rgba(255,196,72,0.5);
 }
 
 .moon::after {
     content: "";
     position: absolute;
-    width: 63px;
-    height: 63px;
-    top: -13px;
-    left: 23px;
+    width: 58px;
+    height: 58px;
+    top: -12px;
+    left: 21px;
     border-radius: 50%;
     background: #101b3b;
 }
 
 .moon-shine {
     position: absolute;
-    top: 7px;
-    left: 30px;
-    width: 7px;
-    height: 7px;
+    top: 8px;
+    left: 27px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: white;
     box-shadow: 0 0 12px 5px #fff5bd;
@@ -121,26 +120,13 @@ body {
     animation: twinkle 1.5s infinite alternate;
 }
 
-.moon-star.one {
-    top: 0;
-    right: 2px;
-}
-
-.moon-star.two {
-    bottom: 5px;
-    left: 0;
-    font-size: 12px;
-}
-
-.moon-star.three {
-    top: 45px;
-    right: -8px;
-    font-size: 11px;
-}
+.moon-star.one { top: 0; right: 0; }
+.moon-star.two { bottom: 0; left: 0; font-size: 12px; }
+.moon-star.three { top: 43px; right: -5px; font-size: 11px; }
 
 @keyframes moonFloat {
     0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -9px); }
+    50% { transform: translate(-50%, -8px); }
 }
 
 /* SHOOTING STARS */
@@ -149,17 +135,16 @@ body {
     width: 90px;
     height: 2px;
     background: linear-gradient(90deg, white, transparent);
-    transform: rotate(-35deg);
     animation: shooting 3s linear forwards;
 }
 
 @keyframes shooting {
     from {
-        transform: translate(0, 0) rotate(-35deg);
+        transform: translate(0,0) rotate(-35deg);
         opacity: 1;
     }
     to {
-        transform: translate(-400px, 300px) rotate(-35deg);
+        transform: translate(-400px,300px) rotate(-35deg);
         opacity: 0;
     }
 }
@@ -173,13 +158,13 @@ body {
     pointer-events: none;
 }
 
-/* SKY LANTERNS */
+/* LANTERNS */
 .lantern {
     position: fixed;
     bottom: -50px;
     width: 17px;
     height: 25px;
-    background: linear-gradient(to bottom, #fff5b5, #ff9b42);
+    background: linear-gradient(to bottom,#fff5b5,#ff9b42);
     border-radius: 45% 45% 35% 35%;
     box-shadow: 0 0 12px #ffc45e, 0 0 25px #ff9b42;
     animation: lanternRise linear infinite;
@@ -197,10 +182,7 @@ body {
 }
 
 @keyframes lanternRise {
-    0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 0; }
     15% { opacity: 1; }
     50% { transform: translateY(-50vh) translateX(25px); }
     100% {
@@ -209,36 +191,24 @@ body {
     }
 }
 
-/* BIRTHDAY WISHES */
+/* BIRTHDAY WISHES - NO OLD HEADING */
 .content {
     position: absolute;
     top: 58%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     width: 90%;
     max-width: 650px;
     text-align: center;
     z-index: 5;
 }
 
-.content h1 {
-    color: #ffe7a0;
-    font-size: clamp(27px, 5vw, 48px);
-    text-shadow: 0 0 15px orange, 0 0 30px gold;
-    animation: titleGlow 2s infinite alternate;
-}
-
 .content p {
-    margin-top: 20px;
-    font-size: clamp(15px, 2.5vw, 21px);
+    margin-top: 15px;
+    font-size: clamp(15px,2.5vw,21px);
     line-height: 1.7;
     color: #fff4df;
     text-shadow: 0 0 8px #a9baff;
-}
-
-@keyframes titleGlow {
-    from { opacity: 0.8; }
-    to { opacity: 1; }
 }
 
 button {
@@ -246,7 +216,7 @@ button {
     padding: 12px 25px;
     border: none;
     border-radius: 30px;
-    background: linear-gradient(45deg, #ffcc70, #ff758c);
+    background: linear-gradient(45deg,#ffcc70,#ff758c);
     color: #171126;
     font-size: 15px;
     font-weight: bold;
@@ -254,36 +224,41 @@ button {
     box-shadow: 0 0 15px #ffb347;
 }
 
-@media (max-width: 500px) {
+/* MOBILE */
+@media(max-width:500px) {
     .star-message {
-        top: 11%;
-        height: 120px;
-        width: 98%;
+        top: 6%;
+        height: 220px;
+        width: 99%;
     }
 
     .moon-container {
-        top: 28%;
-        transform: translateX(-50%) scale(0.8);
-    }
-
-    .content {
-        top: 61%;
-    }
-}
-
-@media (max-height: 650px) {
-    .star-message {
-        top: 5%;
-        height: 105px;
-    }
-
-    .moon-container {
-        top: 24%;
-        transform: translateX(-50%) scale(0.7);
+        top: 22%;
+        transform: translateX(-50%) scale(0.85);
     }
 
     .content {
         top: 59%;
+    }
+
+    .content p {
+        font-size: 15px;
+    }
+}
+
+@media(max-height:650px) {
+    .star-message {
+        top: 2%;
+        height: 170px;
+    }
+
+    .moon-container {
+        top: 19%;
+        transform: translateX(-50%) scale(0.7);
+    }
+
+    .content {
+        top: 62%;
     }
 }
 </style>
@@ -293,12 +268,11 @@ button {
 
 <div class="sky" id="sky">
 
-    <!-- STAR LETTERS -->
     <div class="star-message">
         <canvas id="starText"></canvas>
     </div>
 
-    <!-- STYLISH CRESCENT MOON -->
+    <!-- MOON -->
     <div class="moon-container">
         <div class="moon">
             <div class="moon-shine"></div>
@@ -312,11 +286,8 @@ button {
 
 <canvas id="fireworks"></canvas>
 
-<!-- BIRTHDAY WISHES -->
+<!-- WISHES WITHOUT OLD HAPPY BIRTHDAY HEADING -->
 <div class="content">
-
-    <h1>🎂 Happy Birthday SU 🎂</h1>
-
     <p>
         May your life shine as brightly as the stars
         and sparkle like the beautiful moon.
@@ -330,7 +301,6 @@ button {
     <button onclick="celebrate()">
         🎆 Celebrate Birthday 🎆
     </button>
-
 </div>
 
 <script>
@@ -338,122 +308,174 @@ button {
 /* BACKGROUND STARS */
 const sky = document.getElementById("sky");
 
-for (let i = 0; i < 130; i++) {
-    const star = document.createElement("span");
-    star.className = "star";
-    star.textContent = "✦";
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 3 + "s";
-    star.style.fontSize = (2 + Math.random() * 5) + "px";
-    sky.appendChild(star);
+for (let i = 0; i < 150; i++) {
+    const s = document.createElement("span");
+    s.className = "star";
+    s.textContent = Math.random() > 0.5 ? "✦" : "·";
+    s.style.left = Math.random()*100+"%";
+    s.style.top = Math.random()*100+"%";
+    s.style.fontSize = (3+Math.random()*7)+"px";
+    s.style.animationDelay = Math.random()*3+"s";
+    sky.appendChild(s);
 }
 
-/* HAPPY BIRTHDAY..... SU!!! USING STAR LETTERS */
+/* NATURAL STAR LETTERING */
 const starCanvas = document.getElementById("starText");
 const starCtx = starCanvas.getContext("2d");
 
-function drawStarText() {
+let letterStars = [];
+let sparkleStars = [];
+
+function buildStarLetters() {
 
     const w = starCanvas.clientWidth;
     const h = starCanvas.clientHeight;
     const dpr = window.devicePixelRatio || 1;
 
-    starCanvas.width = w * dpr;
-    starCanvas.height = h * dpr;
+    if (!w || !h) return;
 
-    starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    starCtx.clearRect(0, 0, w, h);
+    starCanvas.width = w*dpr;
+    starCanvas.height = h*dpr;
+
+    starCtx.setTransform(dpr,0,0,dpr,0,0);
 
     const off = document.createElement("canvas");
-    off.width = w;
-    off.height = h;
+    off.width = Math.ceil(w);
+    off.height = Math.ceil(h);
 
     const ctx = off.getContext("2d");
 
-    // Two lines of star lettering
+    // HAPPY BIRTHDAY..... - wide and natural
     const line1 = "HAPPY BIRTHDAY.....";
-    const line2 = "SU!!!";
+    const size1 = Math.min(w/16, 43);
 
-    const fontSize = Math.min(w / 19, 37);
-
+    ctx.font = `bold ${size1}px Georgia`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = `bold ${fontSize}px Arial`;
-
-    // First line
     ctx.fillStyle = "white";
-    ctx.fillText(line1, w / 2, 32, w * 0.98);
+    ctx.fillText(line1,w/2,42,w*0.98);
 
-    // Second line - larger and brighter
-    ctx.font = `bold ${fontSize * 1.65}px Arial`;
-    ctx.fillText(line2, w / 2, 95, w * 0.9);
+    // SU!!! - prominent lettering
+    const line2 = "SU!!!";
+    const size2 = Math.min(w/6, 78);
 
-    const pixels = ctx.getImageData(0, 0, w, h).data;
+    ctx.font = `bold ${size2}px Georgia`;
+    ctx.fillText(line2,w/2,193,w*0.85);
 
-    const points = [];
+    const pixels = ctx.getImageData(0,0,off.width,off.height).data;
 
-    // Convert letters into individual stars
-    for (let y = 0; y < h; y += 4) {
-        for (let x = 0; x < w; x += 4) {
+    letterStars = [];
 
-            const index = (y * w + x) * 4;
+    // Randomly scattered stars following letter shapes
+    for (let y=0; y<h; y+=3) {
+        for (let x=0; x<w; x+=3) {
 
-            if (pixels[index + 3] > 100) {
-                points.push({ x, y });
+            const index = (Math.floor(y)*off.width+Math.floor(x))*4;
+
+            if (pixels[index+3] > 100 && Math.random() > 0.12) {
+
+                const isSU = y > 100;
+
+                letterStars.push({
+                    x: x+(Math.random()-0.5)*2,
+                    y: y+(Math.random()-0.5)*2,
+                    size: isSU
+                        ? 1.8+Math.random()*2.2
+                        : 0.7+Math.random()*1.7,
+                    gold: isSU || Math.random()>0.72,
+                    phase: Math.random()*Math.PI*2,
+                    speed: 0.8+Math.random()*2
+                });
             }
         }
     }
 
-    // Draw each letter using glowing stars
-    starCtx.textAlign = "center";
+    // Additional random bright stars around the letters
+    sparkleStars = [];
 
-    points.forEach((p, i) => {
+    for (let i=0; i<65; i++) {
+        sparkleStars.push({
+            x: Math.random()*w,
+            y: Math.random()*h,
+            size: 0.8+Math.random()*2,
+            phase: Math.random()*Math.PI*2,
+            speed: 0.8+Math.random()*2
+        });
+    }
+}
 
-        const isSU = p.y > 60;
+/* ANIMATE LETTER STARS */
+let animationFrame = 0;
 
-        const size = isSU ? 2.8 : 1.8;
+function drawStarLetters() {
+
+    const w = starCanvas.clientWidth;
+    const h = starCanvas.clientHeight;
+
+    starCtx.clearRect(0,0,w,h);
+
+    animationFrame += 0.025;
+
+    // Natural random stars forming letters
+    letterStars.forEach(s => {
+
+        const glow = 0.45+
+            0.55*(0.5+0.5*Math.sin(animationFrame*s.speed+s.phase));
+
+        starCtx.globalAlpha = glow;
 
         starCtx.beginPath();
-        starCtx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        starCtx.arc(s.x,s.y,s.size,0,Math.PI*2);
 
-        starCtx.fillStyle = isSU ? "#fff0a6" : "#ffffff";
-
-        starCtx.shadowBlur = isSU ? 14 : 8;
-        starCtx.shadowColor = isSU ? "#ffbd38" : "#9edbff";
-
-        starCtx.globalAlpha = 0.7 + Math.random() * 0.3;
+        starCtx.fillStyle = s.gold ? "#ffd978" : "#ffffff";
+        starCtx.shadowBlur = s.gold ? 12 : 8;
+        starCtx.shadowColor = s.gold ? "#ffbd38" : "#b9eaff";
         starCtx.fill();
 
-        // Additional sparkling points
-        if (i % 12 === 0) {
-            starCtx.font = "9px Arial";
-            starCtx.fillStyle = "#fff6c7";
-            starCtx.fillText("✦", p.x, p.y);
+        // Occasional four-point natural sparkle
+        if (glow > 0.91 && s.size > 2) {
+            starCtx.font = "10px Arial";
+            starCtx.fillStyle = "#fff9d6";
+            starCtx.fillText("✦",s.x,s.y);
         }
+    });
+
+    // Scattered decorative stars
+    sparkleStars.forEach(s => {
+
+        const glow = 0.2+
+            0.8*(0.5+0.5*Math.sin(animationFrame*s.speed+s.phase));
+
+        starCtx.globalAlpha = glow;
+        starCtx.beginPath();
+        starCtx.arc(s.x,s.y,s.size,0,Math.PI*2);
+
+        starCtx.fillStyle = "#fff4c1";
+        starCtx.shadowBlur = 12;
+        starCtx.shadowColor = "#ffd76a";
+        starCtx.fill();
     });
 
     starCtx.globalAlpha = 1;
     starCtx.shadowBlur = 0;
+
+    requestAnimationFrame(drawStarLetters);
 }
 
-drawStarText();
-window.addEventListener("resize", drawStarText);
+buildStarLetters();
+drawStarLetters();
 
-// Star lettering twinkle
-setInterval(drawStarText, 1800);
+window.addEventListener("resize",buildStarLetters);
 
-/* RISING SKY LANTERNS */
-for (let i = 0; i < 24; i++) {
+/* LANTERNS */
+for(let i=0;i<24;i++) {
 
-    const lantern = document.createElement("div");
+    const lantern=document.createElement("div");
 
-    lantern.className = "lantern";
-    lantern.style.left = Math.random() * 100 + "%";
-    lantern.style.animationDuration =
-        (12 + Math.random() * 12) + "s";
-    lantern.style.animationDelay =
-        (Math.random() * 20) + "s";
+    lantern.className="lantern";
+    lantern.style.left=Math.random()*100+"%";
+    lantern.style.animationDuration=(12+Math.random()*12)+"s";
+    lantern.style.animationDelay=Math.random()*20+"s";
 
     document.body.appendChild(lantern);
 }
@@ -461,92 +483,88 @@ for (let i = 0; i < 24; i++) {
 /* SHOOTING STARS */
 function createShootingStar() {
 
-    const shooting = document.createElement("div");
+    const s=document.createElement("div");
 
-    shooting.className = "shooting-star";
-    shooting.style.left = (40 + Math.random() * 60) + "%";
-    shooting.style.top = (Math.random() * 45) + "%";
+    s.className="shooting-star";
+    s.style.left=(40+Math.random()*60)+"%";
+    s.style.top=Math.random()*45+"%";
 
-    sky.appendChild(shooting);
+    sky.appendChild(s);
 
-    setTimeout(() => shooting.remove(), 3000);
+    setTimeout(()=>s.remove(),3000);
 }
 
-setInterval(createShootingStar, 2500);
+setInterval(createShootingStar,2500);
 
 /* FIREWORKS */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
 
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
 }
 
 resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize",resizeCanvas);
 
-let particles = [];
+let particles=[];
 
-function explode(x, y) {
+function explode(x,y) {
 
-    const colors = [
-        "#ff3b3b", "#ffd700", "#00e5ff",
-        "#ff69b4", "#7cff6b", "#ffffff",
-        "#b388ff", "#ff9f43"
+    const colors=[
+        "#ff3b3b","#ffd700","#00e5ff",
+        "#ff69b4","#7cff6b","#ffffff",
+        "#b388ff","#ff9f43"
     ];
 
-    const color = colors[
-        Math.floor(Math.random() * colors.length)
-    ];
+    const color=colors[Math.floor(Math.random()*colors.length)];
 
-    for (let i = 0; i < 90; i++) {
+    for(let i=0;i<90;i++) {
 
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 5 + 1;
+        const angle=Math.random()*Math.PI*2;
+        const speed=Math.random()*5+1;
 
         particles.push({
-            x: x,
-            y: y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            life: 100,
-            color: color,
-            size: Math.random() * 3 + 1
+            x,y,
+            vx:Math.cos(angle)*speed,
+            vy:Math.sin(angle)*speed,
+            life:100,
+            color,
+            size:Math.random()*3+1
         });
     }
 }
 
 function animateFireworks() {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    particles.forEach((p, index) => {
+    particles.forEach((p,index)=>{
 
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.025;
-        p.vx *= 0.99;
-        p.vy *= 0.99;
+        p.x+=p.vx;
+        p.y+=p.vy;
+        p.vy+=0.025;
+        p.vx*=0.99;
+        p.vy*=0.99;
         p.life--;
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = Math.max(0, p.life / 100);
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = p.color;
-
+        ctx.fillStyle=p.color;
+        ctx.globalAlpha=Math.max(0,p.life/100);
+        ctx.shadowBlur=12;
+        ctx.shadowColor=p.color;
         ctx.fill();
 
-        if (p.life <= 0) {
-            particles.splice(index, 1);
+        if(p.life<=0) {
+            particles.splice(index,1);
         }
     });
 
-    ctx.globalAlpha = 1;
-    ctx.shadowBlur = 0;
+    ctx.globalAlpha=1;
+    ctx.shadowBlur=0;
 
     requestAnimationFrame(animateFireworks);
 }
@@ -554,33 +572,28 @@ function animateFireworks() {
 animateFireworks();
 
 /* AUTOMATIC FIREWORKS */
-setInterval(() => {
-
+setInterval(()=>{
     explode(
-        Math.random() * canvas.width,
-        Math.random() * canvas.height * 0.55
+        Math.random()*canvas.width,
+        Math.random()*canvas.height*0.55
     );
+},1200);
 
-}, 1200);
-
-/* CELEBRATION BUTTON */
+/* CELEBRATE */
 function celebrate() {
 
-    for (let i = 0; i < 10; i++) {
+    for(let i=0;i<10;i++) {
 
-        setTimeout(() => {
-
+        setTimeout(()=>{
             explode(
-                Math.random() * canvas.width,
-                Math.random() * canvas.height * 0.65
+                Math.random()*canvas.width,
+                Math.random()*canvas.height*0.65
             );
-
-        }, i * 200);
+        },i*200);
     }
 }
 
-/* INITIAL CELEBRATION */
-setTimeout(celebrate, 1000);
+setTimeout(celebrate,1000);
 
 </script>
 
