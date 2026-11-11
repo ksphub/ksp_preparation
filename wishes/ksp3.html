@@ -25,7 +25,6 @@ body {
     color: white;
 }
 
-/* SKY */
 .sky {
     position: fixed;
     inset: 0;
@@ -33,7 +32,7 @@ body {
     pointer-events: none;
 }
 
-/* BACKGROUND STARS */
+/* Background stars */
 .star {
     position: absolute;
     color: white;
@@ -46,15 +45,15 @@ body {
     to { opacity: 1; transform: scale(1.5); }
 }
 
-/* BIRTHDAY STAR CANVAS */
+/* Star lettering */
 .star-message {
     position: absolute;
-    top: 5%;
+    top: 3%;
     left: 50%;
     transform: translateX(-50%);
-    width: 98%;
-    max-width: 950px;
-    height: 240px;
+    width: 99%;
+    max-width: 1000px;
+    height: 270px;
 }
 
 #starText {
@@ -63,15 +62,16 @@ body {
     display: block;
 }
 
-/* STYLISH CRESCENT MOON */
+/* Crescent moon */
 .moon-container {
     position: absolute;
-    top: 22%;
+    top: 13%;
     left: 50%;
     transform: translateX(-50%);
-    width: 95px;
+    width: 100px;
     height: 90px;
     animation: moonFloat 4s ease-in-out infinite;
+    z-index: 2;
 }
 
 .moon {
@@ -129,7 +129,7 @@ body {
     50% { transform: translate(-50%, -8px); }
 }
 
-/* SHOOTING STARS */
+/* Shooting stars */
 .shooting-star {
     position: absolute;
     width: 90px;
@@ -149,7 +149,7 @@ body {
     }
 }
 
-/* FIREWORKS */
+/* Fireworks */
 #fireworks {
     position: fixed;
     inset: 0;
@@ -158,7 +158,7 @@ body {
     pointer-events: none;
 }
 
-/* LANTERNS */
+/* Lanterns */
 .lantern {
     position: fixed;
     bottom: -50px;
@@ -191,14 +191,14 @@ body {
     }
 }
 
-/* BIRTHDAY WISHES - NO OLD HEADING */
+/* Birthday wishes */
 .content {
     position: absolute;
-    top: 58%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 90%;
-    max-width: 650px;
+    max-width: 850px;
     text-align: center;
     z-index: 5;
 }
@@ -224,21 +224,21 @@ button {
     box-shadow: 0 0 15px #ffb347;
 }
 
-/* MOBILE */
+/* Mobile layout */
 @media(max-width:500px) {
     .star-message {
-        top: 6%;
-        height: 220px;
+        top: 4%;
+        height: 230px;
         width: 99%;
     }
 
     .moon-container {
-        top: 22%;
-        transform: translateX(-50%) scale(0.85);
+        top: 12%;
+        transform: translateX(-50%) scale(0.78);
     }
 
     .content {
-        top: 59%;
+        top: 61%;
     }
 
     .content p {
@@ -248,17 +248,17 @@ button {
 
 @media(max-height:650px) {
     .star-message {
-        top: 2%;
-        height: 170px;
+        top: 1%;
+        height: 220px;
     }
 
     .moon-container {
-        top: 19%;
+        top: 11%;
         transform: translateX(-50%) scale(0.7);
     }
 
     .content {
-        top: 62%;
+        top: 64%;
     }
 }
 </style>
@@ -272,7 +272,7 @@ button {
         <canvas id="starText"></canvas>
     </div>
 
-    <!-- MOON -->
+    <!-- Stylish crescent moon -->
     <div class="moon-container">
         <div class="moon">
             <div class="moon-shine"></div>
@@ -286,8 +286,9 @@ button {
 
 <canvas id="fireworks"></canvas>
 
-<!-- WISHES WITHOUT OLD HAPPY BIRTHDAY HEADING -->
+<!-- Birthday wishes: old heading removed -->
 <div class="content">
+
     <p>
         May your life shine as brightly as the stars
         and sparkle like the beautiful moon.
@@ -301,6 +302,7 @@ button {
     <button onclick="celebrate()">
         🎆 Celebrate Birthday 🎆
     </button>
+
 </div>
 
 <script>
@@ -319,7 +321,7 @@ for (let i = 0; i < 150; i++) {
     sky.appendChild(s);
 }
 
-/* NATURAL STAR LETTERING */
+/* STAR LETTERING */
 const starCanvas = document.getElementById("starText");
 const starCtx = starCanvas.getContext("2d");
 
@@ -345,28 +347,29 @@ function buildStarLetters() {
 
     const ctx = off.getContext("2d");
 
-    // HAPPY BIRTHDAY..... - wide and natural
+    /* FIRST LINE: HAPPY BIRTHDAY..... */
     const line1 = "HAPPY BIRTHDAY.....";
-    const size1 = Math.min(w/16, 43);
+    const size1 = Math.min(w/17, 43);
 
     ctx.font = `bold ${size1}px Georgia`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "white";
-    ctx.fillText(line1,w/2,42,w*0.98);
 
-    // SU!!! - prominent lettering
+    ctx.fillText(line1,w/2,43,w*0.98);
+
+    /* SECOND LINE: SU!!! */
     const line2 = "SU!!!";
-    const size2 = Math.min(w/6, 78);
+    const size2 = Math.min(w/6, 76);
 
     ctx.font = `bold ${size2}px Georgia`;
-    ctx.fillText(line2,w/2,193,w*0.85);
+    ctx.fillText(line2,w/2,235,w*0.85);
 
     const pixels = ctx.getImageData(0,0,off.width,off.height).data;
 
     letterStars = [];
 
-    // Randomly scattered stars following letter shapes
+    /* Stars following the actual letter shapes */
     for (let y=0; y<h; y+=3) {
         for (let x=0; x<w; x+=3) {
 
@@ -374,14 +377,14 @@ function buildStarLetters() {
 
             if (pixels[index+3] > 100 && Math.random() > 0.12) {
 
-                const isSU = y > 100;
+                const isSU = y > 110;
 
                 letterStars.push({
                     x: x+(Math.random()-0.5)*2,
                     y: y+(Math.random()-0.5)*2,
                     size: isSU
-                        ? 1.8+Math.random()*2.2
-                        : 0.7+Math.random()*1.7,
+                        ? 1.8+Math.random()*2.3
+                        : 0.8+Math.random()*1.6,
                     gold: isSU || Math.random()>0.72,
                     phase: Math.random()*Math.PI*2,
                     speed: 0.8+Math.random()*2
@@ -390,7 +393,7 @@ function buildStarLetters() {
         }
     }
 
-    // Additional random bright stars around the letters
+    /* Independent decorative stars */
     sparkleStars = [];
 
     for (let i=0; i<65; i++) {
@@ -404,7 +407,7 @@ function buildStarLetters() {
     }
 }
 
-/* ANIMATE LETTER STARS */
+/* ANIMATE THE STARS */
 let animationFrame = 0;
 
 function drawStarLetters() {
@@ -416,7 +419,6 @@ function drawStarLetters() {
 
     animationFrame += 0.025;
 
-    // Natural random stars forming letters
     letterStars.forEach(s => {
 
         const glow = 0.45+
@@ -432,21 +434,20 @@ function drawStarLetters() {
         starCtx.shadowColor = s.gold ? "#ffbd38" : "#b9eaff";
         starCtx.fill();
 
-        // Occasional four-point natural sparkle
-        if (glow > 0.91 && s.size > 2) {
+        if (glow > 0.93 && s.size > 2) {
             starCtx.font = "10px Arial";
             starCtx.fillStyle = "#fff9d6";
             starCtx.fillText("✦",s.x,s.y);
         }
     });
 
-    // Scattered decorative stars
     sparkleStars.forEach(s => {
 
         const glow = 0.2+
             0.8*(0.5+0.5*Math.sin(animationFrame*s.speed+s.phase));
 
         starCtx.globalAlpha = glow;
+
         starCtx.beginPath();
         starCtx.arc(s.x,s.y,s.size,0,Math.PI*2);
 
@@ -467,7 +468,7 @@ drawStarLetters();
 
 window.addEventListener("resize",buildStarLetters);
 
-/* LANTERNS */
+/* RISING LANTERNS */
 for(let i=0;i<24;i++) {
 
     const lantern=document.createElement("div");
@@ -579,7 +580,7 @@ setInterval(()=>{
     );
 },1200);
 
-/* CELEBRATE */
+/* CELEBRATE BUTTON */
 function celebrate() {
 
     for(let i=0;i<10;i++) {
